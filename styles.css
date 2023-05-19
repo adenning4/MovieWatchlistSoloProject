@@ -18,11 +18,13 @@
 .film-poster {
   width: 100px;
   height: 148px;
+  flex-shrink: 0;
 }
 
 .film-poster img {
+  width: 100%;
   height: 100%;
-  background-size: contain;
+  object-fit: cover;
 }
 
 .film-details-box {

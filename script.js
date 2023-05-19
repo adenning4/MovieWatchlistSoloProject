@@ -88,6 +88,16 @@ async function getFilmResultsHtml(ids) {
 
     const response = await fetch(imdbIdSearchUrl);
     const data = await response.json();
+
+    let watchlistIcon;
+    if (isIdInLocalStorage(id)) {
+      watchlistIcon = `<img src="./icons/minus-icon.png"/>`;
+    } else {
+      watchlistIcon = `<img src="./icons/plus-icon.png"/>`;
+    }
+
+    console.log(watchlistIcon);
+
     html += `
           <section class="film-summary">
               <div class="film-poster">
@@ -102,6 +112,7 @@ async function getFilmResultsHtml(ids) {
                 <div class="middle">
                   <p class="film-details">${data["Runtime"]}</p>
                   <p class="film-details">${data["Genre"]}</p>
+                  ${watchlistIcon}
                   <button 
                     data-imdb-id="${id}" 
                     class="watchlist-button">
