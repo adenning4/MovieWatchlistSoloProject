@@ -50,6 +50,21 @@ async function getFilmResultsHtml(ids) {
               <div class="film-poster">
                   <img src="${data["Poster"]}" />
               </div>
+              <div class="film-details-box">
+                <div class="top">
+                  <p class="film-title">${data["Title"]}</p>
+                  <img src="./icons/star-icon.png" />
+                  <p class="film-rating">${data["imdbRating"]}</p>
+                </div>
+                <div class="middle">
+                  <p class="film-details">${data["Runtime"]}</p>
+                  <p class="film-details">${data["Genre"]}</p>
+                  <button class="watchlist-button">Watchlist</button>
+                </div>
+                <div class="bottom">
+                  <p class="film-plot">${data["Plot"]}</p>
+                </div>
+              </div>
           </section>
           `;
   }

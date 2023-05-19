@@ -6,3 +6,25 @@
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
 }
+
+.film-summary,
+.film-details-box,
+.top,
+.middle,
+.bottom {
+  display: flex;
+}
+
+.film-poster {
+  width: 100px;
+  height: 148px;
+}
+
+.film-poster img {
+  height: 100%;
+  background-size: contain;
+}
+
+.film-details-box {
+  flex-direction: column;
+}
