@@ -3,44 +3,29 @@ import { updateLocalStorage, isIdInLocalStorage } from "./utility.js";
 const baseUrl = "https://www.omdbapi.com/";
 const apiKey = "f5d1bb34";
 
-const searchInputEl = document.getElementById("search-input-el");
-const searchResultsEl = document.getElementById("search-results");
+const watchListEl = document.getElementById("watchlist");
 
 document.addEventListener("click", (e) => {
-  if (e.target.id === "search-button-el") {
-    searchTitles();
-  } else if (e.target.className === "watchlist-button") {
+  if (e.target.className === "watchlist-button") {
     updateLocalStorage(e.target.dataset.imdbId);
+    renderWatchListHtml();
   }
 });
 
-async function searchTitles() {
-  if (searchInputEl.value) {
-    const searchTerm = searchInputEl.value.toLowerCase();
+renderWatchListHtml();
 
-    const titleSearchUrl = `${baseUrl}?apikey=${apiKey}&s=${searchTerm}`;
+function renderWatchListHtml() {
+  const watchlist = localStorage.getItem("localIds");
 
-    const response = await fetch(titleSearchUrl);
-    const data = await response.json();
-
-    handleDataResponse(data);
-  }
-}
-
-async function handleDataResponse(data) {
-  if (data.Response === "True") {
-    const imdbIDs = [];
-    data.Search.forEach((film) => {
-      imdbIDs.push(film.imdbID);
-    });
-    const filmResultsHtml = await getFilmResultsHtml(imdbIDs);
-    searchResultsEl.innerHTML = filmResultsHtml;
+  if (watchlist) {
+    getFilmResultsHtml(JSON.parse(watchlist)).then(
+      (data) => (watchListEl.innerHTML = data)
+    );
   } else {
-    searchResultsEl.innerHTML = `
-          <div class="empty-search-results">
-              Unable to find what you're looking for. Please try another search.
-          </div>
-      `;
+    watchListEl.innerHTML = `
+        <p>Your watchlist is looking a little empty...</p>
+        <a href="./index.html">Let's add some movies!</a>
+    `;
   }
 }
 

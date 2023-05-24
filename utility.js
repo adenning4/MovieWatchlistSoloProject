@@ -4,7 +4,11 @@ function updateLocalStorage(id) {
     const localIds = JSON.parse(localStorage.getItem("localIds"));
     const idIndexInLocalIds = localIds.indexOf(id);
     localIds.splice(idIndexInLocalIds, 1);
-    localStorage.setItem("localIds", JSON.stringify(localIds));
+    if (localIds.length) {
+      localStorage.setItem("localIds", JSON.stringify(localIds));
+    } else {
+      localStorage.removeItem("localIds");
+    }
   }
   // if id not in local storage, add it!
   else {
