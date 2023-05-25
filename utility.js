@@ -34,4 +34,15 @@ function localStorageExists() {
   return !!localStorage.getItem("localIds");
 }
 
-export { updateLocalStorage, isIdInLocalStorage };
+function watchListIconUpdate(e) {
+  const currentIcon = e.target.children[0].classList[1];
+  if (currentIcon === "fa-circle-plus") {
+    e.target.innerHTML = `
+      <i class="fa-solid fa-circle-minus"></i> Watchlist`;
+  } else {
+    e.target.innerHTML = `
+      <i class="fa-solid fa-circle-plus"></i> Watchlist`;
+  }
+}
+
+export { updateLocalStorage, isIdInLocalStorage, watchListIconUpdate };

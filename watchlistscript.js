@@ -40,9 +40,9 @@ async function getFilmResultsHtml(ids) {
 
     let watchlistIcon;
     if (isIdInLocalStorage(id)) {
-      watchlistIcon = `<img src="./icons/minus-icon.png"/>`;
+      watchlistIcon = `<i class="fa-solid fa-circle-minus"></i>`;
     } else {
-      watchlistIcon = `<img src="./icons/plus-icon.png"/>`;
+      watchlistIcon = `<i class="fa-solid fa-circle-plus"></i>`;
     }
 
     html += `
@@ -53,16 +53,17 @@ async function getFilmResultsHtml(ids) {
               <div class="film-details-box">
                 <div class="top">
                   <p class="film-title">${data["Title"]}</p>
-                  <img src="./icons/star-icon.png" />
+                  <i class="fa-solid fa-star"></i>
                   <p class="film-rating">${data["imdbRating"]}</p>
                 </div>
                 <div class="middle">
                   <p class="film-details">${data["Runtime"]}</p>
                   <p class="film-details">${data["Genre"]}</p>
-                  ${watchlistIcon}
+                  
                   <button 
                     data-imdb-id="${id}" 
                     class="watchlist-button">
+                    ${watchlistIcon} 
                     Watchlist
                   </button>
                 </div>

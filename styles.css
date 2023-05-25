@@ -4,7 +4,99 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
   font-family: "Inter", sans-serif;
+  height: 100vh;
+  background-color: #121212;
+}
+
+header {
+  height: 208px;
+  background: url(./header-background.png) #444444;
+  background-position: 50% 23%;
+  background-blend-mode: multiply;
+  /* filter: brightness(35%); */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2.5em;
+  color: white;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+header a {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: inherit;
+}
+
+nav {
+  background: #2e2e2f;
+  border-radius: 6px;
+  position: relative;
+  bottom: 19px;
+  height: 38px;
+  margin: 0 44px -38px;
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+nav i,
+nav input {
+  margin: 10px;
+}
+
+nav i {
+  color: #9ca3af;
+}
+
+nav input {
+  background: inherit;
+  border: none;
+  color: #a5a5a5;
+}
+
+nav button {
+  margin-left: auto;
+  height: 100%;
+  width: 120px;
+  border: none;
+  border-radius: 0 6px 6px 0;
+  background: #4b4b4b;
+  color: white;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 44px;
+  align-items: center;
+  justify-content: center;
+  color: #2e2e2f;
+}
+
+main > i,
+main > p {
+  position: relative;
+  top: 20vh;
+}
+
+main > i {
+  font-size: 4rem;
+}
+
+main > p {
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .film-summary,
@@ -15,10 +107,17 @@
   display: flex;
 }
 
+.film-summary {
+  color: white;
+  padding: 1.25em 0;
+  border-bottom: 2px solid;
+}
+
 .film-poster {
   width: 100px;
   height: 148px;
   flex-shrink: 0;
+  border-radius: 3px;
 }
 
 .film-poster img {
@@ -29,4 +128,54 @@
 
 .film-details-box {
   flex-direction: column;
+  padding: 20px;
+}
+
+.film-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.top,
+.middle {
+  align-items: end;
+}
+
+.top > * {
+  margin-right: 8px;
+}
+
+.middle > * {
+  margin-right: 18px;
+}
+
+.middle i {
+  font-size: 1rem;
+}
+
+.middle button {
+  background-color: blue;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+}
+
+.middle {
+  font-size: 0.75rem;
+  margin: 8px 0;
+}
+
+.top > i {
+  color: #fec654;
+  width: 15px;
+}
+
+.film-rating {
+  font-size: 0.75rem;
+}
+
+.film-plot {
+  color: #a5a5a5;
+  font-size: 0.875rem;
 }

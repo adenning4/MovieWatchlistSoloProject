@@ -1,4 +1,8 @@
-import { updateLocalStorage, isIdInLocalStorage } from "./utility.js";
+import {
+  updateLocalStorage,
+  isIdInLocalStorage,
+  watchListIconUpdate,
+} from "./utility.js";
 
 const baseUrl = "https://www.omdbapi.com/";
 const apiKey = "f5d1bb34";
@@ -11,6 +15,7 @@ document.addEventListener("click", (e) => {
     searchTitles();
   } else if (e.target.className === "watchlist-button") {
     updateLocalStorage(e.target.dataset.imdbId);
+    watchListIconUpdate(e);
   }
 });
 
@@ -55,9 +60,10 @@ async function getFilmResultsHtml(ids) {
 
     let watchlistIcon;
     if (isIdInLocalStorage(id)) {
-      watchlistIcon = `<img src="./icons/minus-icon.png"/>`;
+      // watchlistIcon = `<i class="fa-solid fa-circle-minus"></i>`;
+      watchlistIcon = `minus`;
     } else {
-      watchlistIcon = `<img src="./icons/plus-icon.png"/>`;
+      watchlistIcon = `plus`;
     }
 
     html += `
@@ -68,17 +74,16 @@ async function getFilmResultsHtml(ids) {
               <div class="film-details-box">
                 <div class="top">
                   <p class="film-title">${data["Title"]}</p>
-                  <img src="./icons/star-icon.png" />
+                  <i class="fa-solid fa-star"></i>
                   <p class="film-rating">${data["imdbRating"]}</p>
                 </div>
                 <div class="middle">
                   <p class="film-details">${data["Runtime"]}</p>
                   <p class="film-details">${data["Genre"]}</p>
-                  ${watchlistIcon}
                   <button 
-                    data-imdb-id="${id}" 
-                    class="watchlist-button">
-                    Watchlist
+                  data-imdb-id="${id}" 
+                  class="watchlist-button">
+                    <i class="fa-solid fa-circle-minus"></i>
                   </button>
                 </div>
                 <div class="bottom">
