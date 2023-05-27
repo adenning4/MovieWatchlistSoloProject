@@ -88,7 +88,7 @@ async function getFilmResultsHtml(ids) {
                   </button>
                 </div>
                 <div class="bottom">
-                  <p class="film-plot line-clamp-3">${data["Plot"]}</p>
+                  <p class="film-plot line-clamp-3" data-imdb-id="${id}">${data["Plot"]}</p>
                 </div>
               </div>
           </section>

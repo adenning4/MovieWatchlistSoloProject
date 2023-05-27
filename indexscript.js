@@ -18,6 +18,8 @@ document.addEventListener("click", (e) => {
   } else if (e.target.parentElement.className === "watchlist-button") {
     updateLocalStorage(e.target.parentElement.dataset.imdbId);
     watchListIconUpdate(e);
+  } else if (e.target.dataset.readMore) {
+    e.target.parentElement.children[0].classList.remove("line-clamp-3");
   }
 });
 
@@ -43,7 +45,8 @@ function createReadMoreButtons() {
       plot.offsetWidth < plot.scrollWidth
     ) {
       console.log("overflow");
-
+      console.log(plot.dataset.imdbId);
+      plot.parentElement.innerHTML += `<button data-read-more="${plot.dataset.imdbId}">read more</button>`;
       // your element has overflow and truncated
       // show read more / read less button
     } else {
