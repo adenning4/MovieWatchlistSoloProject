@@ -88,7 +88,7 @@ async function getFilmResultsHtml(ids) {
                   </button>
                 </div>
                 <div class="bottom">
-                  <p class="film-plot">${data["Plot"]}</p>
+                  <p class="film-plot line-clamp-3">${data["Plot"]}</p>
                 </div>
               </div>
           </section>
@@ -96,6 +96,19 @@ async function getFilmResultsHtml(ids) {
   }
 
   return html;
+}
+
+function limitPlotLength(plot) {
+  const limitLength = 140;
+  if (plot.length > limitLength) {
+    const truncatedPlot = plot.slice(0, limitLength);
+    return `
+    ${truncatedPlot}...
+    <button>read more</button>
+      `;
+  } else {
+    return plot;
+  }
 }
 
 export {

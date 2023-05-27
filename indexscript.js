@@ -30,8 +30,27 @@ async function searchTitles() {
     const response = await fetch(titleSearchUrl);
     const data = await response.json();
 
-    handleDataResponse(data);
+    await handleDataResponse(data);
+    createReadMoreButtons();
   }
+}
+
+function createReadMoreButtons() {
+  const plots = document.getElementsByClassName("film-plot");
+  Array.prototype.forEach.call(plots, (plot) => {
+    if (
+      plot.offsetHeight < plot.scrollHeight ||
+      plot.offsetWidth < plot.scrollWidth
+    ) {
+      console.log("overflow");
+
+      // your element has overflow and truncated
+      // show read more / read less button
+    } else {
+      console.log("no overflow");
+      // your element doesn't overflow (not truncated)
+    }
+  });
 }
 
 async function handleDataResponse(data) {

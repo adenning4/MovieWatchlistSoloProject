@@ -102,8 +102,7 @@ main > p {
 .film-summary,
 .film-details-box,
 .top,
-.middle,
-.bottom {
+.middle {
   display: flex;
 }
 
@@ -178,4 +177,12 @@ main > p {
 .film-plot {
   color: #a5a5a5;
   font-size: 0.875rem;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  /* truncate to 3 lines */
+  -webkit-line-clamp: 3;
 }
