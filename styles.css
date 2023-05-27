@@ -154,7 +154,7 @@ main > p {
 }
 
 .middle button {
-  background-color: blue;
+  background-color: inherit;
   border: none;
   color: inherit;
   cursor: pointer;
