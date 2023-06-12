@@ -1,3 +1,6 @@
+const baseUrl = "https://www.omdbapi.com/";
+const apiKey = "f5d1bb34";
+
 function updateLocalStorage(id) {
   const localIds = JSON.parse(localStorage.getItem("localIds"));
   // if id in local storage, remove it!
@@ -47,8 +50,46 @@ function watchListIconUpdate(e) {
       <i class="fa-solid fa-circle-plus"></i> Watchlist`;
   }
 }
-const baseUrl = "https://www.omdbapi.com/";
-const apiKey = "f5d1bb34";
+
+function readMoreOrLess(e) {
+  const buttonText = e.target.innerHTML;
+  if (buttonText === "read more") {
+    e.target.parentElement.children[0].classList.remove("line-clamp-3");
+    e.target.innerHTML = "read less";
+  } else if (buttonText === "read less") {
+    e.target.parentElement.children[0].classList.add("line-clamp-3");
+    e.target.innerHTML = "read more";
+  }
+}
+
+function handleReadMoreButtons() {
+  const plots = document.getElementsByClassName("film-plot");
+  Array.prototype.forEach.call(plots, (plot) => {
+    if (plot.parentElement.children[1]) {
+      //A BUTTON IS THERE!
+      if (
+        plot.offsetHeight < plot.scrollHeight ||
+        plot.offsetWidth < plot.scrollWidth
+      ) {
+        //CONTENT IS TRUNCATED AND A BUTTON EXISTS, DO NOTHING
+      } else {
+        //CONTENT IS NOT TRUNCATED AND A BUTTON EXISTS, DELETE THE BUTTON
+        plot.parentElement.children[1].remove();
+      }
+    } else {
+      //A BUTTON IS NOT THERE!
+      if (
+        plot.offsetHeight < plot.scrollHeight ||
+        plot.offsetWidth < plot.scrollWidth
+      ) {
+        //CONTENT IS TRUNCATED AND A BUTTON DOES NOT EXIST, CREATE A BUTTON
+        plot.parentElement.innerHTML += `<button data-read-more="${plot.dataset.imdbId}">read more</button>`;
+      } else {
+        //CONTENT IS NOT TRUNCATED AND A BUTTON DOES NOT EXIST, DO NOTHING
+      }
+    }
+  });
+}
 
 async function getFilmResultsHtml(ids) {
   let html = "";
@@ -117,4 +158,6 @@ export {
   baseUrl,
   apiKey,
   watchListIconUpdate,
+  readMoreOrLess,
+  handleReadMoreButtons,
 };

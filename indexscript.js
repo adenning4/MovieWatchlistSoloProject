@@ -2,6 +2,8 @@ import {
   updateLocalStorage,
   watchListIconUpdate,
   getFilmResultsHtml,
+  readMoreOrLess,
+  handleReadMoreButtons,
   baseUrl,
   apiKey,
 } from "./utility.js";
@@ -19,8 +21,12 @@ document.addEventListener("click", (e) => {
     updateLocalStorage(e.target.parentElement.dataset.imdbId);
     watchListIconUpdate(e);
   } else if (e.target.dataset.readMore) {
-    e.target.parentElement.children[0].classList.remove("line-clamp-3");
+    readMoreOrLess(e);
   }
+});
+
+window.addEventListener("resize", () => {
+  handleReadMoreButtons();
 });
 
 async function searchTitles() {
@@ -33,27 +39,8 @@ async function searchTitles() {
     const data = await response.json();
 
     await handleDataResponse(data);
-    createReadMoreButtons();
+    handleReadMoreButtons();
   }
-}
-
-function createReadMoreButtons() {
-  const plots = document.getElementsByClassName("film-plot");
-  Array.prototype.forEach.call(plots, (plot) => {
-    if (
-      plot.offsetHeight < plot.scrollHeight ||
-      plot.offsetWidth < plot.scrollWidth
-    ) {
-      console.log("overflow");
-      console.log(plot.dataset.imdbId);
-      plot.parentElement.innerHTML += `<button data-read-more="${plot.dataset.imdbId}">read more</button>`;
-      // your element has overflow and truncated
-      // show read more / read less button
-    } else {
-      console.log("no overflow");
-      // your element doesn't overflow (not truncated)
-    }
-  });
 }
 
 async function handleDataResponse(data) {

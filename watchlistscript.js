@@ -23,8 +23,12 @@ function renderWatchListHtml() {
     );
   } else {
     watchListEl.innerHTML = `
+      <div class="empty-watchlist-notice">
         <p>Your watchlist is looking a little empty...</p>
-        <a href="./index.html">Let's add some movies!</a>
+        <a href="./index.html">
+          <i class="fa-solid fa-circle-plus"></i> Let's add some movies!
+        </a>
+      </div>
     `;
   }
 }

@@ -17,7 +17,6 @@ header {
   background: url(./header-background.png) #444444;
   background-position: 50% 23%;
   background-blend-mode: multiply;
-  /* filter: brightness(35%); */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -75,6 +74,11 @@ nav button {
   color: white;
 }
 
+#search-input-el {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
 main {
   display: flex;
   flex-direction: column;
@@ -84,17 +88,22 @@ main {
   color: #2e2e2f;
 }
 
-main > i,
-main > p {
+main > div {
   position: relative;
   top: 20vh;
+  text-align: center;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-main > i {
+.fa-film {
   font-size: 4rem;
 }
 
-main > p {
+.pre-search-prompt {
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -109,7 +118,7 @@ main > p {
 .film-summary {
   color: white;
   padding: 1.25em 0;
-  border-bottom: 2px solid;
+  border-bottom: 2px solid #2c2c2c;
 }
 
 .film-poster {
@@ -137,7 +146,7 @@ main > p {
 
 .top,
 .middle {
-  align-items: end;
+  align-items: center;
 }
 
 .top > * {
@@ -185,4 +194,23 @@ main > p {
   -webkit-box-orient: vertical;
   /* truncate to 3 lines */
   -webkit-line-clamp: 3;
+}
+
+.empty-watchlist-notice > p {
+  font-size: 1.125rem;
+  color: #787878;
+  margin-bottom: 1em;
+}
+
+.empty-watchlist-notice > a {
+  text-decoration: none;
+  font-size: 0.875rem;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.empty-watchlist-notice i {
+  font-size: 1.125rem;
+  margin-right: 4px;
 }
