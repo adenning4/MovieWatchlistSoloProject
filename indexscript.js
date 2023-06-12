@@ -25,12 +25,21 @@ document.addEventListener("click", (e) => {
   }
 });
 
+searchInputEl.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    searchTitles();
+  }
+});
+
 window.addEventListener("resize", () => {
   handleReadMoreButtons();
 });
 
 async function searchTitles() {
   if (searchInputEl.value) {
+    // SHOW BUFFER WHEEL
+    searchResultsEl.innerHTML = `<i class="load-spinner fa-solid fa-spinner fa-spin-pulse"></i>`;
+
     const searchTerm = searchInputEl.value.toLowerCase();
 
     const titleSearchUrl = `${baseUrl}?apikey=${apiKey}&s=${searchTerm}`;

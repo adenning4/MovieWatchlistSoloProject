@@ -52,7 +52,7 @@ function watchListIconUpdate(e) {
 }
 
 function readMoreOrLess(e) {
-  const buttonText = e.target.innerHTML;
+  const buttonText = e.target.textContent;
   if (buttonText === "read more") {
     e.target.parentElement.children[0].classList.remove("line-clamp-3");
     e.target.innerHTML = "read less";
@@ -70,13 +70,14 @@ function handleReadMoreButtons() {
       plot.offsetWidth < plot.scrollWidth
     ) {
       if (!plot.parentElement.children[1]) {
-        //CONTENT IS NOT TRUNCATED AND A BUTTON EXISTS, DELETE THE BUTTON & RESET THE LINE CLAMP
-
-        plot.parentElement.innerHTML += `<button data-read-more="${plot.dataset.imdbId}">read more</button>`;
+        //CONTENT IS TRUNCATED AND A BUTTON DOES NOT EXIST, CREATE A BUTTON
+        plot.parentElement.innerHTML += `<button data-read-more="${plot.dataset.imdbId}"
+        class="read-more-less-button"
+        >read more</button>`;
       }
     } else {
       if (plot.parentElement.children[1]) {
-        //CONTENT IS TRUNCATED AND A BUTTON DOES NOT EXIST, CREATE A BUTTON
+        //CONTENT IS NOT TRUNCATED AND A BUTTON EXISTS, DELETE THE BUTTON & RESET THE LINE CLAMP
         plot.parentElement.children[1].remove();
         plot.parentElement.children[0].classList.add("line-clamp-3");
       }
@@ -130,19 +131,6 @@ async function getFilmResultsHtml(ids) {
   }
 
   return html;
-}
-
-function limitPlotLength(plot) {
-  const limitLength = 140;
-  if (plot.length > limitLength) {
-    const truncatedPlot = plot.slice(0, limitLength);
-    return `
-    ${truncatedPlot}...
-    <button>read more</button>
-      `;
-  } else {
-    return plot;
-  }
 }
 
 export {

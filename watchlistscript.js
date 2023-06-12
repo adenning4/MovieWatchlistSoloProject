@@ -1,4 +1,9 @@
-import { updateLocalStorage, getFilmResultsHtml } from "./utility.js";
+import {
+  updateLocalStorage,
+  getFilmResultsHtml,
+  handleReadMoreButtons,
+  readMoreOrLess,
+} from "./utility.js";
 
 const watchListEl = document.getElementById("watchlist");
 
@@ -9,18 +14,24 @@ document.addEventListener("click", (e) => {
   } else if (e.target.parentElement.className === "watchlist-button") {
     updateLocalStorage(e.target.parentElement.dataset.imdbId);
     renderWatchListHtml();
+  } else if (e.target.dataset.readMore) {
+    readMoreOrLess(e);
   }
+});
+
+window.addEventListener("resize", () => {
+  handleReadMoreButtons();
 });
 
 renderWatchListHtml();
 
-function renderWatchListHtml() {
+async function renderWatchListHtml() {
   const watchlist = localStorage.getItem("localIds");
 
   if (watchlist) {
-    getFilmResultsHtml(JSON.parse(watchlist)).then(
-      (data) => (watchListEl.innerHTML = data)
-    );
+    const filmResultsHtml = await getFilmResultsHtml(JSON.parse(watchlist));
+    watchListEl.innerHTML = filmResultsHtml;
+    handleReadMoreButtons();
   } else {
     watchListEl.innerHTML = `
       <div class="empty-watchlist-notice">
