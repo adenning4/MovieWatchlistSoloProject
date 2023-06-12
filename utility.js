@@ -65,27 +65,20 @@ function readMoreOrLess(e) {
 function handleReadMoreButtons() {
   const plots = document.getElementsByClassName("film-plot");
   Array.prototype.forEach.call(plots, (plot) => {
-    if (plot.parentElement.children[1]) {
-      //A BUTTON IS THERE!
-      if (
-        plot.offsetHeight < plot.scrollHeight ||
-        plot.offsetWidth < plot.scrollWidth
-      ) {
-        //CONTENT IS TRUNCATED AND A BUTTON EXISTS, DO NOTHING
-      } else {
-        //CONTENT IS NOT TRUNCATED AND A BUTTON EXISTS, DELETE THE BUTTON
-        plot.parentElement.children[1].remove();
+    if (
+      plot.offsetHeight < plot.scrollHeight ||
+      plot.offsetWidth < plot.scrollWidth
+    ) {
+      if (!plot.parentElement.children[1]) {
+        //CONTENT IS NOT TRUNCATED AND A BUTTON EXISTS, DELETE THE BUTTON & RESET THE LINE CLAMP
+
+        plot.parentElement.innerHTML += `<button data-read-more="${plot.dataset.imdbId}">read more</button>`;
       }
     } else {
-      //A BUTTON IS NOT THERE!
-      if (
-        plot.offsetHeight < plot.scrollHeight ||
-        plot.offsetWidth < plot.scrollWidth
-      ) {
+      if (plot.parentElement.children[1]) {
         //CONTENT IS TRUNCATED AND A BUTTON DOES NOT EXIST, CREATE A BUTTON
-        plot.parentElement.innerHTML += `<button data-read-more="${plot.dataset.imdbId}">read more</button>`;
-      } else {
-        //CONTENT IS NOT TRUNCATED AND A BUTTON DOES NOT EXIST, DO NOTHING
+        plot.parentElement.children[1].remove();
+        plot.parentElement.children[0].classList.add("line-clamp-3");
       }
     }
   });
